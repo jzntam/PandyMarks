@@ -38,12 +38,33 @@ angular.module('Derp', [
   $scope.setCurrentCategory = setCurrentCategory;
   $scope.isCurrentCategory  = isCurrentCategory;
 
+  // CRUD Section
+  function resetCreateForm() {
+    $scope.newBookmark = {
+      title: '',
+      url: '',
+      category: $scope.currentCategory
+    }
+  }
+
+  function createBookmark(bookmark) {
+    bookmark.id = $scope.bookmarks.length;
+    $scope.bookmarks.push(bookmark);
+
+    resetCreateForm();
+  }
+
+  $scope.createBookmark = createBookmark
+
+  // Create and Editing
   $scope.isCreating = false;
   $scope.isEditing  = false;
 
   function startCreating() {
     $scope.isCreating = true;
     $scope.isEditing  = false;
+
+    resetCreateForm();
   }
 
   function cancelCreating() {
