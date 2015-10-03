@@ -1,4 +1,4 @@
-// $scoope makes the controller object available in the views
+// $scope makes the controller object available in the views
 
 angular.module('Derp', [
 
@@ -44,7 +44,7 @@ angular.module('Derp', [
       title: '',
       url: '',
       category: $scope.currentCategory
-    }
+    };
   }
 
   function createBookmark(bookmark) {
@@ -54,9 +54,10 @@ angular.module('Derp', [
     resetCreateForm();
   }
 
-  $scope.createBookmark = createBookmark
+  $scope.createBookmark = createBookmark;
   $scope.editedBookmark = null;
 
+  // Edit and Update Bookmark
   function setEditedBookmark(bookmark) {
     $scope.editedBookmark = angular.copy(bookmark);
   }
@@ -65,21 +66,30 @@ angular.module('Derp', [
     var index = _.findIndex($scope.bookmarks, function(b) {
       return b.id == bookmark.id;
     });
-    $scope.bookmarks[index] = bookmark;
 
-    $scope.editedBookmark = null;
-    $scope.isEditing = false;
+    $scope.bookmarks[index] = bookmark;
+    $scope.editedBookmark   = null;
+    $scope.isEditing        = false;
   }
 
   function isSelectedBookmark(bookmarkId) {
     return $scope.editedBookmark !== null && $scope.editedBookmark.id === bookmarkId;
   }
 
-  $scope.setEditedBookmark = setEditedBookmark;
-  $scope.updateBookmark = updateBookmark;
+  $scope.setEditedBookmark  = setEditedBookmark;
+  $scope.updateBookmark     = updateBookmark;
   $scope.isSelectedBookmark = isSelectedBookmark;
 
-  // Create and Editing
+  // Delete Bookmark
+  function deleteBookmark(bookmark) {
+    _.remove($scope.bookmarks, function(b) {
+      return b.id == bookmark.id;
+    });
+  }
+
+  $scope.deleteBookmark = deleteBookmark;
+
+  // Create and Editing Bookmarks
   $scope.isCreating = false;
   $scope.isEditing  = false;
 
@@ -108,7 +118,7 @@ angular.module('Derp', [
   }
 
   function shouldShowEditing() {
-    return $scope.isEditing && !$scope.isCreating
+    return $scope.isEditing && !$scope.isCreating;
   }
 
   $scope.startCreating      = startCreating;
