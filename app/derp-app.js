@@ -1,7 +1,8 @@
 // $scope makes the controller object available in the views
 
 angular.module('Derp', [
-
+  'categories',
+  'categories.bookmarks'
 ])
 .controller('MainCtrl', function($scope) {
   $scope.categories = [
