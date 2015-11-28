@@ -1,9 +1,18 @@
 // $scope makes the controller object available in the views
 
 angular.module('Derp', [
+  'ui.router',
   'categories',
   'categories.bookmarks'
 ])
+.config(function($stateProvider) {
+  $stateProvider
+    .state('derp', {
+      url: '/',
+      templateUrl: 'app/categories/categories.tmpl.html',
+      controller: 'MainCtrl'
+    });
+})
 .controller('MainCtrl', function($scope) {
   $scope.categories = [
     {"id": 0, "name": "Development"},
