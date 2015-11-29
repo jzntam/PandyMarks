@@ -5,13 +5,13 @@ angular.module('Derp', [
   'categories',
   'categories.bookmarks'
 ])
-.config(function($stateProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('derp', {
-      url: '/',
-      templateUrl: 'app/categories/categories.tmpl.html',
-      controller: 'MainCtrl'
+      url: '',
+      abstract: true
     });
+  $urlRouterProvider.otherwise('/');
 })
 .controller('MainCtrl', function($scope) {
   $scope.categories = [
