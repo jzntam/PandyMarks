@@ -20,9 +20,7 @@ angular.module('categories', [
   .controller('CategoriesCtrl', function CategoriesCtrl($scope){
 
   })
-  .controller('BookmarksCtrl', function BookmarksCtrl($scope){
 
-  });
 
 // the @ symbol in the views makes it an absolute path
 // it will target this named view specifically with any unnamed state
