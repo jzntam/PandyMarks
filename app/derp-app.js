@@ -13,7 +13,7 @@ angular.module('Derp', [
     });
   $urlRouterProvider.otherwise('/');
 })
-.controller('MainCtrl', function($scope) {
+.controller('MainCtrl', function($scope, $state) {
   $scope.categories = [
     {"id": 0, "name": "Development"},
     {"id": 1, "name": "Design"},
@@ -37,6 +37,10 @@ angular.module('Derp', [
 
   function setCurrentCategory(category) {
     $scope.currentCategory = category;
+
+    // this isnt working find out why. exactly like tutorial.
+    // $state.go('derp.categories.bookmarks', {category:category.name});
+
     cancelCreating();
     cancelEditing();
   }
