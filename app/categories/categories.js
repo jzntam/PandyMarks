@@ -7,18 +7,19 @@ angular.module('categories', [
         url: '/',
         views: {
           'categories@': {
-            controller: 'CategoriesCtrl',
+            controller: 'CategoriesListCtrl as categoriesListCtrl',
             templateUrl: 'app/categories/categories.tmpl.html'
           },
           'bookmarks@': {
-            controller: 'BookmarksCtrl',
+            controller: 'BookmarksListCtrl as bookmarksListCtrl',
             templateUrl: 'app/categories/bookmarks/bookmarks.tmpl.html'
           }
         }
       })
   })
-  .controller('CategoriesCtrl', function CategoriesCtrl($scope){
-
+  .controller('CategoriesListCtrl', function CategoriesListCtrl(CategoriesModel){
+    var categoriesListCtrl = this;
+    categoriesListCtrl.categories = CategoriesModel.getCategories();
   })
 
 

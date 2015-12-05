@@ -1,6 +1,6 @@
 <a href="#" ng-click="setCurrentCategory(null)"><img class="logo" src="http://www.fillmurray.com/g/145/85"></a>
 <ul class="nav nav-sidebar">
-  <li ng-repeat="category in categories" ng-class="{'active':isCurrentCategory(category)}">
+  <li ng-repeat="category in categoriesListCtrl.categories" ng-class="{'active':isCurrentCategory(category)}">
     <a ui-sref="derp.categories.bookmarks({category:category.name})" ng-click="setCurrentCategory(category)">
       {{category.name}}
     </a>
