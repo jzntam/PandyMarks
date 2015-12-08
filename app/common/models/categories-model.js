@@ -1,11 +1,10 @@
 angular.module('derp.models.categories', [
 
 ])
-  .service('CategoriesModel',function($http){
+  .service('CategoriesModel',function($http, $q){
     var model = this,
     URLS = { FETCH: 'data/categories.json' },
     categories;
-
 
     function extract(result) {
       return result.data;
@@ -17,7 +16,8 @@ angular.module('derp.models.categories', [
     }
 
     model.getCategories = function(){
-      return $http.get(URLS.FETCH).then(cacheCategories);
+      return categories ? $q.when(categories) : $http.get(URLS.FETCH).then(cacheCategories);
     }
+
   })
 ;
