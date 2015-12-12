@@ -18,5 +18,12 @@ angular.module('derp.models.bookmarks', [
     model.getBookmarks = function(){
       return $http.get(URLS.FETCH).then(cacheBookmarks);
     }
+
+    model.createBookmark = function(bookmark){
+      bookmark.id = bookmarks.length;
+      bookmarks.push(bookmark);
+
+    }
+
   })
 ;
