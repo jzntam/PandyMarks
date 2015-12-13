@@ -1,7 +1,7 @@
 angular.module('derp.models.bookmarks', [
 
 ])
-  .service('BookmarksModel', function($http){
+  .service('BookmarksModel', function($http, $q){
     var model = this,
     URLS = { FETCH: 'data/bookmarks.json' },
     bookmarks;
@@ -15,15 +15,51 @@ angular.module('derp.models.bookmarks', [
       return bookmarks;
     }
 
+    function findBookmark(bookmarkId){
+      return _.find(bookmarks, function(bookmark) {
+        return bookmark.id === parseInt(bookmarkId, 10);
+      })
+    }
+
+    model.getBookmarkById = function(bookmarkId){
+      var deferred = $q.defer();
+
+      if(bookmarks){
+        deferred.resolve(findBookmark(bookmarkId))
+      } else {
+        model.getBookmarks().then(function() {
+          deferred.resolve(findBookmark(bookmarkId));
+        })
+      }
+
+      return deferred.promise;
+    }
+
     model.getBookmarks = function(){
-      return $http.get(URLS.FETCH).then(cacheBookmarks);
+      var deferred = $q.defer();
+
+      if(bookmarks){
+        deferred.resolve(bookmarks);
+      } else {
+        $http.get(URLS.FETCH).then(function(bookmarks){
+          deferred.resolve(cacheBookmarks(bookmarks))
+        });
+      }
+
+      return deferred.promise;
     }
 
     model.createBookmark = function(bookmark){
       bookmark.id = bookmarks.length;
       bookmarks.push(bookmark);
-
     }
 
+    model.updateBookmark = function(bookmark){
+      var index = _.findIndex(bookmarks, function (b) {
+        return b.id == bookmark.id
+      });
+
+      bookmarks[index] = bookmark;
+    }
   })
 ;
