@@ -2,6 +2,7 @@
 
 angular.module('Derp', [
   'ui.router',
+  'ngAnimate',
   'categories',
   'categories.bookmarks'
 ])
