@@ -21,9 +21,9 @@ angular.module('categories.bookmarks.create', [
     returnToBookmarks();
   }
 
-  function createBookmark(bookmark){
-    BookmarksModel.createBookmark(bookmark);
-    returnToBookmarks;
+  function createBookmark(){
+    BookmarksModel.createBookmark(createBookmarkCtrl.newBookmark);
+    returnToBookmarks();
   }
 
   function resetForm(){
